@@ -351,7 +351,7 @@
       "description": "Official ABAP Keyword Documentation (Latest)",
       "libraryId": "/abap-docs-latest",
       "sourcePath": "abap-docs/docs/latest/md",
-      "baseUrl": "https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US",
+      "baseUrl": "https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US",
       "pathPattern": "/{file}",
       "anchorStyle": "sap-help"
     }

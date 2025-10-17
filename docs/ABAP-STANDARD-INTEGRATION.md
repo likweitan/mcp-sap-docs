@@ -39,7 +39,7 @@ ABAP documentation is now integrated as a **standard source** in the MCP system,
 export class AbapUrlGenerator extends BaseUrlGenerator {
   generateUrl(context): string {
     // Converts: abeninline_declarations.md 
-    // To: https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abeninline_declarations.htm
+    // To: https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abeninline_declarations.html
   }
 }
 ```
@@ -77,7 +77,7 @@ sources/abap-docs/docs/7.58/md/
 ```
 
 ### **🔗 URL Generation**
-- `abeninline_declarations.md` → `https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abeninline_declarations.htm`
+- `abeninline_declarations.md` → `https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abeninline_declarations.html`
 - Works across all ABAP versions (7.52-7.58, latest)
 - Direct links to official SAP documentation
 
@@ -135,12 +135,12 @@ Found 5 results for 'ABAP inline declarations':
 
 ⚡ **Inline Declarations (ABAP 7.58)**
    Data declarations directly in ABAP statements for cleaner code...
-   🔗 https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abeninline_declarations.htm
+   🔗 https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abeninline_declarations.html
    📋 3KB | individual | beginner
 
 ⚡ **DATA - Inline Declaration (ABAP 7.58)** 
    Creating data objects inline using DATA() operator...
-   🔗 https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abendata_inline.htm
+   🔗 https://help.sap.com/doc/abapdocu_758_index_htm/7.58/en-US/abendata_inline.html
    📋 2KB | individual | intermediate
 ```
 

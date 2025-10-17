@@ -38,28 +38,30 @@ export class AbapUrlGenerator extends BaseUrlGenerator {
    * Extract ABAP version from config
    */
   private extractVersion(): string | null {
-    // Check if version is in the library ID or path pattern
-    const pathPattern = this.config.pathPattern || '';
     const libraryId = this.libraryId || '';
+    const pathPattern = this.config.pathPattern || '';
+    const baseUrl = this.config.baseUrl || '';
+    const combined = `${libraryId}|${pathPattern}|${baseUrl}`.toLowerCase();
     
-    // Handle "latest" version explicitly
-    if (libraryId.includes('latest') || pathPattern.includes('latest')) {
+    if (combined.includes('latest') || combined.includes('cloud')) {
       return 'latest';
     }
     
-    // Try to extract version patterns: 7.58, 9.16, 8.10, etc.
-    const versionMatch = (libraryId + pathPattern).match(/\/(\d+\.\d+)\//);
-    if (versionMatch) {
-      return versionMatch[1];
+    const decimalSources = [baseUrl, pathPattern, libraryId];
+    for (const source of decimalSources) {
+      const match = source?.match(/(?:\/|_|-)(\d+\.\d+)(?=(?:\/|_|-|\.|$))/);
+      if (match) {
+        return match[1];
+      }
     }
     
-    // Try alternative patterns for cloud/new versions
-    const cloudMatch = (libraryId + pathPattern).match(/-(latest|cloud|916|916\w*|81\w*)-/);
-    if (cloudMatch) {
-      const match = cloudMatch[1];
-      if (match === 'latest' || match === 'cloud') return 'latest';
-      if (match.startsWith('916')) return '9.16';
-      if (match.startsWith('81')) return '8.10';
+    const compactSources = [libraryId, pathPattern, baseUrl];
+    for (const source of compactSources) {
+      const match = source?.match(/(?:\/|_|-)(\d{3})(?=(?:\/|_|-|\.|$))/);
+      if (match) {
+        const digits = match[1];
+        return `${digits[0]}.${digits.slice(1)}`;
+      }
     }
     
     return null;
@@ -70,11 +72,16 @@ export class AbapUrlGenerator extends BaseUrlGenerator {
    */
   private getAbapBaseUrl(version: string): string {
     // Handle latest version - use the newest cloud version
-    if (version === 'latest') {
+    const normalized = version.toLowerCase();
+    
+    if (normalized === 'latest' || normalized === 'cloud') {
       return 'https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US';
     }
     
     const versionNum = parseFloat(version);
+    if (Number.isNaN(versionNum)) {
+      return 'https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US';
+    }
     
     // Cloud versions (9.1x) - ABAP Cloud / SAP BTP
     if (versionNum >= 9.1) {

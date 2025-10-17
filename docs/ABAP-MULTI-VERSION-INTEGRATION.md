@@ -102,10 +102,10 @@ Query: "exception handling 7.53"
 ```typescript
 // Automatic version-specific URLs
 "/abap-docs-757/abenloop.md" 
-→ "https://help.sap.com/doc/abapdocu_757_index_htm/7.57/en-US/abenloop.htm"
+→ "https://help.sap.com/doc/abapdocu_757_index_htm/7.57/en-US/abenloop.html"
 
 "/abap-docs-latest/abenselect.md"
-→ "https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/abenselect.htm"
+→ "https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/abenselect.html"
 ```
 
 ---
